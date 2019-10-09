@@ -89,7 +89,7 @@ INPUT_DEVICE_ID:
 
     if (strlen(input_dev_id) <= USER_DEVICE_ID_LEN)
     {
-        log_err("App secret: %s\n", input_dev_id);
+        log_err("Device id: %s\n", input_dev_id);
         strncpy(usr_config.dev_id, input_dev_id, USER_DEVICE_ID_LEN);
     }
     else
@@ -106,7 +106,7 @@ INPUT_DEVICE_TYPE:
 
     if (strlen(input_dev_type) <= USER_DEVICE_TYPE_LEN)
     {
-        log_err("App secret: %s\n", input_dev_type);
+        log_err("Device type: %s\n", input_dev_type);
         strncpy(usr_config.dev_type, input_dev_type, USER_DEVICE_TYPE_LEN);
     }
     else

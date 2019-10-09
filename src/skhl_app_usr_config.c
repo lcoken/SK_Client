@@ -180,7 +180,7 @@ skhl_result skhl_usr_config(void *cfg, uint8_t *result)
                 break;
         }
 
-        skhl_sleep(1000);
+        skhl_sleep(2000);
     }
 
     return usr_config_result;
