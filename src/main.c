@@ -29,6 +29,8 @@ int main(int32_t argc, char **argv)
     char input_com[INPUT_BUFF_SIZE]     = {0};
     char input_app_key[INPUT_BUFF_SIZE] = {0};
     char input_app_sec[INPUT_BUFF_SIZE] = {0};
+    char input_dev_id[INPUT_BUFF_SIZE] = {0};
+    char input_dev_type[INPUT_BUFF_SIZE] = {0};
 
 INPUT_PORT:
     log_info("Please input serial port (COM0/1/2/3/4...): ");
@@ -78,6 +80,40 @@ INPUT_APP_SECRET:
         log_err("Input require %d char, but input length is %d\n", USER_SECRET_LEN,
                                                             (int)strlen(input_app_sec));
         goto INPUT_APP_SECRET;
+    }
+
+INPUT_DEVICE_ID:
+    log_info("Please input device id: ");
+    fflush(stdin);
+    scanf("%s", input_dev_id);
+
+    if (strlen(input_dev_id) <= USER_DEVICE_ID_LEN)
+    {
+        log_info("App secret: %s\n", input_dev_id);
+        strncpy(usr_config.dev_id, input_dev_id, USER_DEVICE_ID_LEN);
+    }
+    else
+    {
+        log_err("Input require %d char, but input length is %d\n", USER_DEVICE_ID_LEN,
+                                                            (int)strlen(input_dev_id));
+        goto INPUT_DEVICE_ID;
+    }
+
+INPUT_DEVICE_TYPE:
+    log_info("Please input device type: ");
+    fflush(stdin);
+    scanf("%s", input_dev_type);
+
+    if (strlen(input_dev_type) <= USER_DEVICE_TYPE_LEN)
+    {
+        log_info("App secret: %s\n", input_dev_type);
+        strncpy(usr_config.dev_type, input_dev_type, USER_DEVICE_TYPE_LEN);
+    }
+    else
+    {
+        log_err("Input require %d char, but input length is %d\n", USER_DEVICE_TYPE_LEN,
+                                                            (int)strlen(input_dev_type));
+        goto INPUT_DEVICE_TYPE;
     }
 
 
