@@ -79,6 +79,27 @@ skhl_result skhl_app_send_usr_setting(void *config)
     return skhl_send_data(&pack_attr);
 }
 
+
+
+skhl_result skhl_app_send_usr_verify(void)
+{
+    skhl_local_pack_attr_t pack_attr  = {0};
+    static uint32_t seq_id = 0;
+
+    pack_attr.cmd_set = CMD_SET_COMMON;
+    pack_attr.cmd_dir = PACKAGE_DIR_REQ;
+    pack_attr.cmd_id = CMD_ID_WAIT_VERIFY;
+    pack_attr.target = target_rule;
+    pack_attr.seq_id = seq_id++;
+    pack_attr.data   = NULL;
+    pack_attr.data_len = 0;
+    pack_attr.version  = COMM_PROTOCOL_V0;
+
+    return skhl_send_data(&pack_attr);
+}
+
+
+
 skhl_result skhl_usr_config(void *cfg, uint8_t *result)
 {
     uint8_t step                = USR_CONFIG_CHECK_LINK;
@@ -87,7 +108,7 @@ skhl_result skhl_usr_config(void *cfg, uint8_t *result)
 
     while (step != USR_CONFIG_DONE)
     {
-        log_info("Configing...\n");
+        log_debug("Configging ...\n");
         switch (step)
         {
             case USR_CONFIG_CHECK_LINK:
@@ -136,6 +157,7 @@ skhl_result skhl_usr_config(void *cfg, uint8_t *result)
                 {
                     if (usr_config_ack.verify_ack != TRUE)
                     {
+                        skhl_app_send_usr_verify();
                         repeat_count++;
                         if (repeat_count > REPEAT_MAX_COUNT * 3)
                         {

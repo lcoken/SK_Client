@@ -31,6 +31,7 @@ static skhl_result skhl_get_version(skhl_local_pack_attr_t *pack)
 
     if (pack->cmd_dir == PACKAGE_DIR_ACK)
     {
+        log_err("[Sk_receiver] Get version ack!\n");
         usr_config_ack.get_version_ack = TRUE;
     }
     else
@@ -57,8 +58,8 @@ static skhl_result skhl_usr_setting(skhl_local_pack_attr_t *pack)
 
     if (pack->cmd_dir == PACKAGE_DIR_ACK)
     {
+        log_err("[Sk_receiver] Get usr setting ack!\n");
         usr_config_ack.usr_setting_ack = TRUE;
-        log_err("usr setting ack!\n");
     }
 
     return ret;
@@ -74,9 +75,9 @@ static skhl_result skhl_config_wait_verify(skhl_local_pack_attr_t *pack)
 
     if (pack->cmd_dir == PACKAGE_DIR_ACK)
     {
+        log_err("[Sk_receiver] Get verify result = (%d)!\n", req->verify_result);
         usr_config_ack.verify_ack = TRUE;
         usr_config_ack.verify_result = req->verify_result;
-        log_err("verify result = (%d)!\n", req->verify_result);
     }
 
     return ret;

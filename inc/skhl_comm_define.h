@@ -169,6 +169,7 @@ typedef struct
 } __attribute__((packed)) usr_setting_ack_t;
 
 /* WAIT VERIFY RESULT */
+
 typedef struct
 {
     uint8_t     verify_result;

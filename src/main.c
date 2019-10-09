@@ -33,13 +33,13 @@ int main(int32_t argc, char **argv)
     char input_dev_type[INPUT_BUFF_SIZE] = {0};
 
 INPUT_PORT:
-    log_info("Please input serial port (COM0/1/2/3/4...): ");
+    log_err("Please input serial port (COM0/1/2/3/4...): ");
     fflush(stdin);
     scanf("%s", input_com);
 
     if ((strncmp(input_com, "COM", 3) == 0) && (strlen(input_com) > 3))
     {
-        log_info("Serial port: %s\n", input_com);
+        log_err("Serial port: %s\n", input_com);
         config.port = input_com;
     }
     else
@@ -49,13 +49,13 @@ INPUT_PORT:
     }
 
 INPUT_APP_KEY:
-    log_info("Please input APP KEY: ");
+    log_err("Please input APP KEY: ");
     fflush(stdin);
     scanf("%s", input_app_key);
 
     if (strlen(input_app_key) == USER_KEY_LEN)
     {
-        log_info("App key: %s\n", input_app_key);
+        log_err("App key: %s\n", input_app_key);
         strncpy(usr_config.usr_key, input_app_key, USER_KEY_LEN);
     }
     else
@@ -66,13 +66,13 @@ INPUT_APP_KEY:
     }
 
 INPUT_APP_SECRET:
-    log_info("Please input APP SECRET: ");
+    log_err("Please input APP SECRET: ");
     fflush(stdin);
     scanf("%s", input_app_sec);
 
     if (strlen(input_app_sec) == USER_SECRET_LEN)
     {
-        log_info("App secret: %s\n", input_app_sec);
+        log_err("App secret: %s\n", input_app_sec);
         strncpy(usr_config.usr_secret, input_app_sec, USER_SECRET_LEN);
     }
     else
@@ -83,13 +83,13 @@ INPUT_APP_SECRET:
     }
 
 INPUT_DEVICE_ID:
-    log_info("Please input device id: ");
+    log_err("Please input device id: ");
     fflush(stdin);
     scanf("%s", input_dev_id);
 
     if (strlen(input_dev_id) <= USER_DEVICE_ID_LEN)
     {
-        log_info("App secret: %s\n", input_dev_id);
+        log_err("App secret: %s\n", input_dev_id);
         strncpy(usr_config.dev_id, input_dev_id, USER_DEVICE_ID_LEN);
     }
     else
@@ -100,13 +100,13 @@ INPUT_DEVICE_ID:
     }
 
 INPUT_DEVICE_TYPE:
-    log_info("Please input device type: ");
+    log_err("Please input device type: ");
     fflush(stdin);
     scanf("%s", input_dev_type);
 
     if (strlen(input_dev_type) <= USER_DEVICE_TYPE_LEN)
     {
-        log_info("App secret: %s\n", input_dev_type);
+        log_err("App secret: %s\n", input_dev_type);
         strncpy(usr_config.dev_type, input_dev_type, USER_DEVICE_TYPE_LEN);
     }
     else
@@ -118,7 +118,7 @@ INPUT_DEVICE_TYPE:
 
 
     // start to setup conig.
-    log_info("Start to initial communication with sk receiver...\n");
+    log_err("Start to initial communication with sk receiver...\n");
     config.rule = COMM_TARGET_ID_PC;
     ret = skhl_comm_init((void *)&config);
     if (ret != 0)

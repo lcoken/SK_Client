@@ -95,7 +95,7 @@ static skhl_result skhl_pack_data(uint8_t *data, skhl_local_pack_attr_t *attr, u
         package->attribute.cmd_dir  = attr->cmd_dir;
         package->attribute.target   = attr->target;
         package->attribute.source   = context->this_host;
-        log_info("package rule : 0x%x\n", context->this_host);
+        log_debug("package rule : 0x%x\n", context->this_host);
 
         if ((attr->data_len !=  0) && (attr->data != NULL))
         {
@@ -244,7 +244,7 @@ void phrase_data(void)
                         ring_buffer_size--;
                         if (!ring_buffer_size)
                         {
-                            printf("ring buffer null!\n");
+                            log_debug("ring buffer null!\n");
                             step = GO_OUT;
                             break;
                         }
@@ -341,7 +341,7 @@ void phrase_data(void)
                         phrase_addr = phrase_addr % desc->buffer_size;
 
                         step = LOOKING_FOR_HEADER;
-                        log_info("crc16 failed should be (0x%x), but it got (0x%x)!\n", crc16, pack_crc16);
+                        log_err("crc16 failed should be (0x%x), but it got (0x%x)!\n", crc16, pack_crc16);
 
                     }
                 }
@@ -369,7 +369,7 @@ static uint64_t skhl_phrase_core(void *p)
             continue;
         }
 
-        log_info("get event!\n");
+        log_debug("get event!\n");
         phrase_data();
     }
     log_warn("Thread (%s) exit...\n", __FUNCTION__);
